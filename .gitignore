@@ -6,3 +6,7 @@ a.out
 test
 input
 output
+*-out
+out
+*.old
+OUT
