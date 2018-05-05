@@ -29,11 +29,11 @@ void clean() {
 	std::cin >> std::ws;
 }
 
-const int N_MAX = 100000 + 1;
+const int N_MAX = 200 + 1;
 int N;
 
 std::array<int, N_MAX> ants;
-std::unordered_map<int, std::unordered_map<int, int>> memory;
+std::array<std::unordered_map<int, int>, N_MAX> memory;
 
 int solve(int pos, int weightLeft) {
 	int ans = memory[pos][weightLeft];
@@ -47,9 +47,14 @@ int solve(int pos, int weightLeft) {
 		for (int i = pos + 1; i < N; ++i) {
 			int newWeightLimit = ants[i] * 6;
 			int newWeightLeft = weightLeft - ants[i];
-			if (newWeightLeft >= 0) {
+			if (newWeightLeft > 0) {
 				int minWeightLeft = newWeightLimit < newWeightLeft ? newWeightLimit : newWeightLeft;
 				value = 1 + solve(i, minWeightLeft);
+				if (value > ans) {
+					ans = value;
+				}
+			} else if (newWeightLeft == 0) {
+				value = 1;
 				if (value > ans) {
 					ans = value;
 				}
@@ -64,13 +69,14 @@ int solve(int pos, int weightLeft) {
 }
 
 int main(int argc, char *argv[]) {
-	hacks();
-
 	int T, t_counter=0;
 
 	for(std::cin >> T; t_counter < T; t_counter ++){
 		ants.fill(0);
-		memory.clear();
+
+		for (auto i : memory) {
+			i.clear();
+		}
 
 		std::cin >> N;
 		for (int i = 1; i <= N; ++i) {
@@ -86,7 +92,5 @@ int main(int argc, char *argv[]) {
 		}
 		std::cout << "Case #" << t_counter + 1 << ": " << ans << std::endl;
 	}
-
 	return 0;
 }
-

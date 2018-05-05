@@ -31,48 +31,44 @@ void clean() {
 	std::cin >> std::ws;
 }
 
+const auto L_MAX = 10;
+const auto N_MAX = 2000;
+
+bool findString(std::string& string, std::unordered_set<std::string>& words, std::unordered_set<char> alphas[], int alphasLen, int pos){
+	if (pos == alphasLen) {
+		if (words.count(string) == 0) {
+			return true;
+		}
+	} else {
+		for (auto alpha : alphas[pos]) {
+			string[pos] = alpha;
+			if (findString(string, words, alphas, alphasLen, pos + 1)) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
 int main(int argc, char *argv[]) {
 	hacks();
-	const auto L_MAX = 10;
-	const auto N_MAX = 2000;
 	int T, t_counter=0;
 
 	for(std::cin >> T; t_counter < T; t_counter ++){
 		int N, L;
-		std::unordered_map<char, std::unordered_set<char>> combine[L_MAX];
-		std::set<char> alphas[L_MAX];
-		char string[L_MAX + 1];
+		std::unordered_set<char> alphas[L_MAX];
+		std::unordered_set<std::string> words;
+		std::string string;
 		std::cin >> N >> L;
 		for (int i = 0; i < N; ++i) {
 			std::cin >> string;
-			for (int i = 0; i < L - 1; ++i) {
-				combine[i][string[i]].insert(string[i+1]);
-			}
 			for (int i = 0; i < L; ++i) {
 				alphas[i].insert(string[i]);
 			}
+			words.insert(string);
 		}
-        bool unique = false;
-        int i = 0;
-        for (i = 0; i < L - 1; ++i) {
-            if (unique) { break; }
-			for (auto alpha : alphas[i]) {
-                if (unique) { break; }
-                for (auto nextAlpha : alphas[i + 1]) {
-                    if(combine[i][alpha].count(nextAlpha) == 0) {
-                        unique = true;
-                        string[i] = alpha; i++;
-                        string[i] = nextAlpha;
-                        break;
-                    }
-                }
-			}
-		}
-        if (unique) {
-            while (i < L) {
-                string[i] = *alphas[i].begin();
-                i++;
-            }
+		auto found = findString(string, words, alphas, L, 0);
+        if (found) {
             std::cout << "Case #" << t_counter + 1 << ": " << string << std::endl;
         } else {
             std::cout << "Case #" << t_counter + 1 << ": " << "-" << std::endl;
