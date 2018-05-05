@@ -29,7 +29,7 @@ void clean() {
 	std::cin >> std::ws;
 }
 
-const int N_MAX = 200 + 1;
+const int N_MAX = 100000 + 1;
 int N;
 
 std::array<int, N_MAX> ants;
@@ -73,18 +73,17 @@ int main(int argc, char *argv[]) {
 
 	for(std::cin >> T; t_counter < T; t_counter ++){
 		ants.fill(0);
-
-		for (auto i : memory) {
-			i.clear();
-		}
-
 		std::cin >> N;
 		for (int i = 1; i <= N; ++i) {
 			std::cin >> ants[N - i];
 		}
 
+		for (auto &i : memory) {
+			i.clear();
+		}
+
 		int ans = 0;
-		for (int i = 0; i < N; ++i) {
+		for (int i = N - 1; i >= 0; --i) {
 			int value = 1 + solve(i, ants[i] * 6);
 			if (value > ans) {
 				ans = value;
