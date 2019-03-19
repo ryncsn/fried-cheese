@@ -82,9 +82,9 @@ flags = [
 #'./tests/gmock',
 #'-isystem',
 #'./tests/gmock/include',
-'-isystem',
+'-I',
 '/usr/include',
-'-isystem',
+'-I',
 '/usr/local/include',
 #'-isystem',
 #'/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/c++/v1',
@@ -190,7 +190,6 @@ def FlagsForFile( filename, **kwargs ):
   else:
     relative_to = DirectoryOfThisScript()
     final_flags = MakeRelativePathsInFlagsAbsolute( flags, relative_to )
-
   return {
     'flags': final_flags,
     'do_cache': True
