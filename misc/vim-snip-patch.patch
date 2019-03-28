@@ -1,0 +1,104 @@
+From e97c88322ceb1dbac1e7193ff6e1510c65863a72 Mon Sep 17 00:00:00 2001
+From: ryncsn <ryncsn@gmail.com>
+Date: Tue, 19 Mar 2019 23:12:39 +0800
+Subject: [PATCH] Update template
+
+---
+ snippets/cpp.snippets | 70 +++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 70 insertions(+)
+
+diff --git a/snippets/cpp.snippets b/snippets/cpp.snippets
+index f47a683..7337fed 100644
+--- a/snippets/cpp.snippets
++++ b/snippets/cpp.snippets
+@@ -57,6 +57,9 @@ snippet queue
+ # std::priority_queue
+ snippet pqueue
+ 	std::priority_queue<${1:T}> ${2};
++# std::pair
++snippet pair
++	std::pair<${1:T}, ${2:T}> ${3};
+ ##
+ ## STL smart pointers
+ # std::shared_ptr
+@@ -178,6 +181,26 @@ snippet fori
+ 	for (int ${2:i} = 0; $2 < ${1:count}; $2${3:++}) {
+ 		${4}
+ 	}
++# for j
++snippet forj
++	for (int ${2:j} = 0; $2 < ${1:count}; $2${3:++}) {
++		${4}
++	}
++# for k
++snippet fori
++	for (int ${2:k} = 0; $2 < ${1:count}; $2${3:++}) {
++		${4}
++	}
++# for l
++snippet fori
++	for (int ${2:l} = 0; $2 < ${1:count}; $2${3:++}) {
++		${4}
++	}
++# for m
++snippet fori
++	for (int ${2:m} = 0; $2 < ${1:count}; $2${3:++}) {
++		${4}
++	}
+ 
+ # foreach
+ snippet fore
+@@ -217,3 +240,50 @@ snippet af auto function
+ 	{
+ 		${0}
+ 	};
++
++snippet t01 template01
++	/*
++	 * Author: Kairui Song
++	 * Date: ${8:`strftime("%Y-%m-%d")`}
++	 */
++	#include <iostream>
++	#include <limits>
++	#include <iomanip>
++	#include <algorithm>
++	#include <cmath>
++	#include <list>
++	#include <map>
++	#include <set>
++	#include <array>
++	#include <queue>
++	#include <vector>
++	#include <bitset>
++	#include <cstring>
++	#include <forward_list>
++	#include <unordered_set>
++	#include <unordered_map>
++
++	#define SET_PERCISION(x) std::cout << std::fixed << std::setprecision(x)
++	#define INF std::numeric_limits<int>::max()
++	#define PI M_PI
++
++	void hacks() {
++		std::cout.sync_with_stdio(false);
++	}
++
++	void clean() {
++		std::cin >> std::ws;
++	}
++
++
++
++	int main(int argc, char *argv[]) {
++		hacks();
++		int test_case_n, test_case_c = 0;
++
++		for(std::cin >> test_case_n; test_case_c < test_case_n; test_case_c ++){
++		    std::cout << "Case #" << test_case_c + 1 << ": ";
++		    std::cout << std::endl;
++		}
++		return 0;
++	}
+-- 
+2.21.0
+
